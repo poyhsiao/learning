@@ -17,17 +17,20 @@
 ![react 生命週期][]
 圖1.
 
+資料參考自： [Component Specs and Lifecycle][]
+
 其實 [reactjs][] 的生命週期循環是相當單純的，其實就如 圖1. 所示，與原本的 [MVC][] 相當不同，路徑只有單個方向，同樣的，也只是在操作生命週期的各個部分，避免可能造成的 [MVC][] 混亂
 
 相關 [reactjs][] 的生命週期各個狀態說明如下：
 
 #### render
 
-**render** 所有 method 中最重要的一部分，也是***必須/不可或缺***的一個 method
+**render** 所有 method 中最重要的一部分，也是***必須|不可或缺***的一個 method
 
 其實可以把它解釋為**顯示**的概念，與 [nodejs][] 的 template 項目，都需要 render 概念是一模一樣的，差別只是在於，如過真的什麼都不要顯示，就直接讓 render 回傳 ***false*** 或是 ***null*** 就可以了
 
 ### getInitialState
+
 
 
 
@@ -48,6 +51,8 @@
 [webpack]: http://webpack.github.io/ "webpack"
 
 [MVC]: http://zh.wikipedia.org/zh-tw/MVC "MVC"
+
+[Component Specs and Lifecycle]: https://facebook.github.io/react/docs/component-specs.html "Component Specs and Lifecycle"
 
 ### images
 
