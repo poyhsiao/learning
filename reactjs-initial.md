@@ -135,8 +135,59 @@ componentWillReceiveProps: function(nextProps) {
 
 #### Updating: shouldComponentUpdate
 
+```
+boolean shouldComponentUpdate(object nextProps, object nextState)
+```
 
+當新的 props 或是新的 state 接收到，而且在顯示之前會觸發。 ***shouldComponentUpdate*** 在初始顯示前無法觸發或是呼叫， ***forceUpdate*** 也無法觸發。
 
+在新的 props 和 stats 發生改變時，使用 ***shouldComponentUpdate*** 會回傳 **false**，也不需要元件確實更新。
+
+```
+boolean shouldComponentUpdate(object nextProps, object nextState) {
+    return nextProps.id !== this.props.id;
+}
+```
+
+如果 ***shouldComponentUpdate*** 回傳 **false**， ***render()*** 會完全忽略直至下個 state 改變發生的時候 (此外， ***componentWillUpdate*** 以及 ***componentDidUpdate*** 都不會被觸發或是執行)
+
+為了要避免在狀態改變的情況下可能的錯誤發生，在預設情況下， ***shouldComponentUpdate*** 通常都回傳 **true** ，但是，如果你夠小心，讓狀態都保持在固定且唯讀 props 處於固定的狀態下，則你可以不理會 ***shouldCompoenentUpdate*** ，則可以比較前後 props 以及 state 的部份。
+
+如果效能有瓶頸，尤其是有非常多的元件時，使用 ***shouldComponentUpdate*** 可以加速你的程式
+
+#### Updating: componentWillUpdate
+
+```
+componentWillUpdate(object nextProps, object nextState)
+```
+
+當收到新的 props 或是 state ，並且在產出元件前，將會立刻被觸發。 ***componentWillUpdate*** 不會在初始建立元件時被觸發。
+
+使用時機在於更新發生前觸發。
+
+> Note:
+> 
+> 不能在 ***this.setState()*** 使用 ***componentWillUpdate***。如果需要更新在 prop 改變時，更新 state ，則應該使用 ***componentWillReceiveProps***
+
+#### Updating: componentDidUpdate
+
+```
+componentDidUpdate(object prevProp, object prevState)
+```
+
+在元件更新而且產出 DOM 後，則立即會觸發。 ***componentDidUpdate*** 無法在初始產出元件時觸發或呼叫。
+
+使用時機在元件被更新且 DOM 被更新時。
+
+#### Unmounting: componentWillUnmount
+
+```
+componentWillUnmount()
+```
+
+在元件從 DOM 中移除前，立即會觸發。
+
+在個別的計時器 (timers) 或是清除任何 DOM 元件時，會先觸發 ***componentDidMount*** ，會清除 ***componentWillUnmount*** 方式的作用
 
 ## references
 
