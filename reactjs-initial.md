@@ -12,7 +12,128 @@
 
 ## reactjs
 
-### 生命週期
+### Top-level API
+
+#### React
+
+**React** 是進入 **React** 函式庫的的進入點，如果有使用其他以建立的套件，也可以把 **React** 設成全域變數。如果使用 ***[CommonJS][]*** 的方式管理模組，也可以使用 ***require()*** 的方式使用
+
+##### React.Component
+
+```
+class Component
+```
+
+在定義 **[ES6][]** 的物件時， ***Component*** 是使用 **React Components** 最基礎的物件。可以參考 ***[Reusable Components][]*** 了解如何使用 **[ES6][]** 物件在 **React** 的使用方式，如果想要知道每個方法如何使用，可以參考 ***[Component API][]***
+
+##### React.createClass
+
+```
+ReactClass createClass(object specification)
+```
+
+***createClass()*** 能夠建立一個元件的物件。一個元件使用 ***render*** 的回傳一個獨立的子項目，作為實作元件的方法。 子項目可以是隨意深度 (結構) 。與標準使用 ***prototype*** 方式建立的物件有所不同，並不需要使用 ***new*** 的方式產生新的物件，可以很方便地使用 ***createClass()*** 方式包裝新的實例 ( *instance* ) 使用。
+
+如果想要知道更多關於物件操作方式，可以參考 [Component Specs and Livecycle][] \( Kim 註： [React 生命週期](#React_life_cycle) )
+
+##### React.createElement
+
+```
+ReactElement createElement(
+    string/ReactClass type,
+    [object props],
+    [children ...]
+)
+```
+
+根據所指定的類型，產生並回傳 **ReactElement** 。類型的參數可以是 html 標籤，或是標籤名稱 (如： 'div', 'span' 等)，或是 **ReactClass** (透過 ***React.createClass*** 所產生的)
+
+##### React.cloneElement
+
+```
+ReactElement cloneElement(
+    ReactElement element,
+    [object props],
+    [children ...]
+)
+```
+
+運用克隆 (Kim 註：完整複製) 和回傳一個新的 **ReactElement** 元件。新產生的元件會具備有與原本的元件有著相同的 **props** 。新的子元件，會取代原本已經存在的子元件。不同於 ***React.addons.cloneWithProps*** ，相對的 *key* 和 *ref* 會完整被保留，而且在整合任何 **props** 後，也不會有特別的行為發生 (不像 **cloneWithProps** )，可以參考 [v0.13 RC2 blog post][] ，以了解完整的差異。
+
+##### React.createFactory
+
+```
+factoryFunction createFactory(
+    string/ReactClass type
+)
+```
+
+根據所給定的 **ReactElements** 的類型，回傳一個 *function* ，類似於 ***React.createElement*** ，類型可以是 html 標籤字串 (如：'div', 'span' 等)，或是 **ReactClass**
+
+##### React.render
+
+```
+ReactComponent render(
+    ReactElement element,
+    DOMElement container,
+    [function callback]
+)
+```
+
+在 DOM 指定的內容中，呈現 **ReactElement** ，並且回傳相關的元件。
+
+如果 **ReactElement** 已經在指定的內容中呈現了，呼叫 ***render*** 則會更新原本已經存在於 DOM 中的元件，並且更新 *React* 的元件。
+
+如果有提供 **callback function** ， **callback function** 會在網頁元件呈現或更新後被呼叫。
+
+> Note:
+> 
+> ***React.render()*** 會取代所提供網頁元件的內容項目。未來， ***React.render()*** *可能* 只會更新已經存在的 DOM 項目，而不是覆蓋已存在的子元件。
+
+##### React.unmountComponentAtNode
+
+```
+boolean unmountComponentAtNode(DOMElement container)
+```
+
+移除一個已經在 html DOM 呈現的 React 元件，並且會清除被綁定的事件處理器以及其生命週期的 state。如果目前沒有任何元件存在於指定的容器中， ***unmountComponentAtNode()*** 不會做任何事。如果成功移除 html 元件，則會回傳 *true* ，如果容器內沒有任何元件，則會回傳 *false*
+
+##### React.renderToString
+
+```
+string renderToString(ReactElement element)
+```
+
+運用於 **ReactElement** 產生出初始的 html 時。 ***renderToString()*** 應該只能使用在 *server* 端使用。 React 會回傳一串的 html 字串。可以使用 ***renderToString()*** 在 *server* 端產生 html 以及快速產生需要的初始標記語言。這對於搜尋引擎 (*[SEO][]*) 已抓取網頁方面，有著很棒很顯著的效果。
+
+如果在 server 端，已經產出 html 的環境中呼叫 ***React.render()*** ， React 會保存已產出的 html 標記語言，以及只加入事件處理項目。這對於增加第一次頁面讀取的表現以及使用者體驗有很大的助益。
+
+##### React.renderToStaticMarkup
+
+```
+string renderToStaticMarkup(ReactElement element)
+```
+
+類似於 ***renderToString*** ，差別在於 ***renderToStaticMarkup*** 不會產生 DOM 的屬性 (如： **data-react-id** )(Kim 註： 只會產生乾淨的 html，而沒有 React 專用的 id)。這用於使用 **React** 產生非常乾淨簡單的靜態頁面非常有用，而且也不會有其他的屬性，相對也會節省許多空間/容量。
+
+##### React.isValidElement
+
+```
+boolean isValidElement(* object)
+```
+
+驗證物件是否是 *ReactElement* 。
+
+##### React.findDOMNode
+
+```
+DOMElement findDOMNode(ReactComponent component)
+```
+
+
+
+
+### <a name="React_life_cycle"></a>React生命週期
 
 ![react 生命週期][]
 圖1.
@@ -192,6 +313,17 @@ componentWillUnmount()
 ## references
 
 ### hyperlinks
+
+[CommonJS]: http://en.wikipedia.org/wiki/CommonJS "CommonJS"
+
+[ES6]: http://www.codedata.com.tw/javascript/introducing-es6-1-harmony-history "ECMAScript 6"
+
+[Component API]: https://facebook.github.io/react/docs/component-api.html "Component API"
+
+[v0.13 RC2 blog post]: https://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.html "v0.13 RC2 blog post"
+
+[Component Specs and Livecycle]: https://facebook.github.io/react/docs/component-specs.html "Component Specs and Livecycle"
+
 [reactjs]: https://facebook.github.io/react/index.html "reactjs"
 
 [jsx]: https://jsx.github.io/ "jsx"
