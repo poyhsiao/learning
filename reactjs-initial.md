@@ -16,11 +16,11 @@
 
 #### React
 
-**React** 是進入 **React** 函式庫的的進入點，如果有使用其他以建立的套件，也可以把 **React** 設成全域變數。如果使用 ***[CommonJS][]*** 的方式管理模組，也可以使用 ***require()*** 的方式使用
+**React** 是進入 **React** 函式庫的的進入點，如果有使用其他以建立的套件，也可以把 **React** 設成全域變數。如果使用 ***[CommonJS][]*** 的方式管理模組，也可以使用 `require()` 的方式使用
 
 ##### React.Component
 
-```
+```javascript
 class Component
 ```
 
@@ -28,17 +28,17 @@ class Component
 
 ##### React.createClass
 
-```
+```javascript
 ReactClass createClass(object specification)
 ```
 
-***createClass()*** 能夠建立一個元件的物件。一個元件使用 ***render*** 的回傳一個獨立的子項目，作為實作元件的方法。 子項目可以是隨意深度 (結構) 。與標準使用 ***prototype*** 方式建立的物件有所不同，並不需要使用 ***new*** 的方式產生新的物件，可以很方便地使用 ***createClass()*** 方式包裝新的實例 ( *instance* ) 使用。
+***createClass()*** 能夠建立一個元件的物件。一個元件使用 `render` 的回傳一個獨立的子項目，作為實作元件的方法。 子項目可以是隨意深度 (結構) 。與標準使用 `prototype` 方式建立的物件有所不同，並不需要使用 `new` 的方式產生新的物件，可以很方便地使用 ***createClass()*** 方式包裝新的實例 ( *instance* ) 使用。
 
 如果想要知道更多關於物件操作方式，可以參考 [Component Specs and Livecycle][] \( Kim 註： [React 生命週期](#React_life_cycle) )
 
 ##### React.createElement
 
-```
+```javascript
 ReactElement createElement(
     string/ReactClass type,
     [object props],
@@ -46,11 +46,11 @@ ReactElement createElement(
 )
 ```
 
-根據所指定的類型，產生並回傳 **ReactElement** 。類型的參數可以是 html 標籤，或是標籤名稱 (如： 'div', 'span' 等)，或是 **ReactClass** (透過 ***React.createClass*** 所產生的)
+根據所指定的類型，產生並回傳 `ReactElement` 。類型的參數可以是 html 標籤，或是標籤名稱 (如： 'div', 'span' 等)，或是 `ReactClass` (透過 ***React.createClass*** 所產生的)
 
 ##### React.cloneElement
 
-```
+```javascript
 ReactElement cloneElement(
     ReactElement element,
     [object props],
@@ -62,7 +62,7 @@ ReactElement cloneElement(
 
 ##### React.createFactory
 
-```
+```javascript
 factoryFunction createFactory(
     string/ReactClass type
 )
@@ -72,7 +72,7 @@ factoryFunction createFactory(
 
 ##### React.render
 
-```
+```javascript
 ReactComponent render(
     ReactElement element,
     DOMElement container,
@@ -92,7 +92,7 @@ ReactComponent render(
 
 ##### React.unmountComponentAtNode
 
-```
+```javascript
 boolean unmountComponentAtNode(DOMElement container)
 ```
 
@@ -100,7 +100,7 @@ boolean unmountComponentAtNode(DOMElement container)
 
 ##### React.renderToString
 
-```
+```javascript
 string renderToString(ReactElement element)
 ```
 
@@ -110,7 +110,7 @@ string renderToString(ReactElement element)
 
 ##### React.renderToStaticMarkup
 
-```
+```javascript
 string renderToStaticMarkup(ReactElement element)
 ```
 
@@ -118,7 +118,7 @@ string renderToStaticMarkup(ReactElement element)
 
 ##### React.isValidElement
 
-```
+```javascript
 boolean isValidElement(* object)
 ```
 
@@ -126,7 +126,7 @@ boolean isValidElement(* object)
 
 ##### React.findDOMNode
 
-```
+```javascript
 DOMElement findDOMNode(ReactComponent component)
 ```
 
@@ -138,7 +138,7 @@ DOMElement findDOMNode(ReactComponent component)
 
 例如：
 
-```
+```javascript
 React.DOM.div(null, 'Hello Wrold!')
 ```
 
@@ -148,7 +148,7 @@ React.DOM.div(null, 'Hello Wrold!')
 
 ###### React.initializeTouchEvents
 
-```
+```javascript
 initializeTouchEvents(boolean shouldUseTouch)
 ```
 
@@ -160,7 +160,7 @@ initializeTouchEvents(boolean shouldUseTouch)
 
 ###### React.Children.map
 
-```
+```javascript
 object React.Children.map(
     object children,
     function fn 
@@ -172,7 +172,7 @@ object React.Children.map(
 
 ###### React.Children.forEach
 
-```
+```javascript
 React.Children.forEach(
     object children,
     function fn
@@ -184,7 +184,7 @@ React.Children.forEach(
 
 ###### React.Children.count
 
-```
+```javascript
 number React.Children.count(object children)
 ```
 
@@ -193,7 +193,7 @@ number React.Children.count(object children)
 
 ###### React.Children.only
 
-```
+```javascript
 object React.Children.only(object children)
 ```
 
@@ -204,8 +204,122 @@ object React.Children.only(object children)
 #### React.Component
 
 當執行 React 後， React 元件即會於 React 物件內部建立。在 React 運行後，即可以重複使用 React 項目，也可以使用 `this` 的方式於 React 中存取元件提供的相關方法。如果想要在 React 外部存取 React 元件，則需要使用 `React.render` 存取已經儲存在 React 中的項目。元件的其他項目，可以參考 [more about refs][] 獲取相同資訊。
-Instances of a React Component are created internally in React when rendering. These instances are reused in subsequent renders, and can be accessed in your component methods as `this`. The only way to get a handle to a React Component instance outside of React is by storing the return value of `React.render`. Inside other Components, you may use [refs](/react/docs/more-about-refs.html) to achieve the same result.
 
+#### setState
+
+```javascript
+setState(function|object nextState[, function callback])
+```
+
+結合下個狀態到目前的狀態。 ***setState*** 主要是使用在透過事件處理方式和 server 端的要求 callback 方式，觸發更新 UI。
+
+第一個參數可以設為物件 (包含零個以上要更新的 key )，或是一個函式 (包含狀態和 props)，並且會回傳包含要更新 key 值的物件。
+
+下面是個簡單的物件使用範例：
+
+```javascript
+setState({mykey: 'my new value'});
+```
+
+也可以透過特殊樣式的方式傳入函式 `function(state, props)` 。 ***setState*** 對於在先前有設定狀態和 props ，並且想排隊更新特定狀態時，非常有用。例如，我們想要在狀態中的數值加一時：
+
+```javascript
+setState(function(previousState, currentProps) {
+    return {myInteger: previousState.myInteger + 1};
+});
+```
+
+第二個參數 (選擇性) 是一個 callback 函式，會在 ***setState*** 完成時執行一次，而且元件會重新被執行呈現一次。
+
+> Notes:
+> 
+> ***千萬不要直接修改*** `this.state` 。使用 ***setState()*** 可以取代原本設定的 `this.state` 值。請把 `this.state` 當做是唯讀的。
+> 
+> ***setState()*** 不會立即修改 `this.state` ，但是會稍微暫停目前的狀態，直至發詩變化。在呼叫 ***setState()*** 後存取 `this.state` 可能會回傳目前設定值。
+> 
+> 對於批次同步呼叫 ***setState*** ，並沒有任何保證可以在成效方面有大幅增進。
+> 
+> 除非使用 ***shouldComponentUpdate()*** 手動修改呈現狀態，否則 ***setState()*** 都會自動觸發重新頁面呈現。如果物件已經被修改，而且沒辦法使用 ***shouldComponentUpdate()*** 調整狀態的改變，則可以使用 ***setState()*** 修改成為與先前狀態不同，且避免沒必要的重新頁面更新。
+
+#### replaceState
+
+```javascript
+replaceState(object nextState[, function callback])
+```
+
+類似於 ***setState()*** ，不過會刪除 `nextState` 不同且已經存在的狀態值。
+
+> Noted:
+> 
+> ***replaceState()*** 不相容於從 **React.Component** 延伸方式 [ES6][] 的 class 元件， ***replaceState()*** 可能會在未來的版本中，從 React 中移除
+
+#### forceUpdate
+
+```javascript
+forceUpdate([function callback])
+```
+
+如果是使用 `render()` 而不是使用 `this.props` 或 `this.state` 方法取得一些其他資訊，必須告知 React 重新呈現頁面，重新呼叫 `render()` 時，則必須使用 ***forceUpdate()*** 。如果需要直接修改 `this.state` ，也可以使用 ***forceUpdate()*** 達成。
+
+呼叫 ***forceUpdate()*** 也會呼叫 ***render()*** 重新呈現頁面，而且不需要呼叫 ***shouldComponentUpdate()*** 。 ***forceUpdate()*** 會觸發對子元件的生命週期方式，包括對於所有子項目呼叫 ***shouldComponentUpdate*** 。 React 仍然只會對指定更新的 DOM 做更新而已。
+
+一般來說，為了讓你產生的應用程式更清楚、簡單以及提昇效率，應該盡量在 `render()` 時使用 `this.props` 和 `this.state`，而盡可能避免使用 ***forceUpdate()*** 。
+
+#### getDOMNode
+
+```javascript
+DOMElement getDOMNode()
+```
+
+如果元件已經加載入 DOM ， ***getDOMNode()*** 會回傳瀏覽器產出的原生 DOM 元件。 ***getDOMNode()*** 對於像是如取得表格資料時，或是操作 DOM 元件時非常有用。當呈現資料時回傳 `null` 或是 `false` 時， `this.getDOMNode()` 也會回傳 `null`
+
+> Noted:
+> 
+> ***getDOMNode()*** 已經非常建議 *不要* 使用了，相對應蓋盡量使用 ***React.findDOMNode()***
+> 
+> ***getDOMNode()*** 不相容於從 **React.Component** 延伸方式 [ES6][] 的 class 元件， ***getDOMNode()*** 可能會在未來的版本中，從 React 中移除
+
+#### isMounted
+
+```javascript
+bool isMounted()
+```
+
+當 React 元件已經在 DOM 上面呈現時，則會回傳 `true` ，否則會回傳 `false` 。可以使用 ***isMounted()*** 在 ***setState()*** 或 ***forceUpdate()*** 做非同步檢查。
+
+> Noted:
+> 
+> ***isMounted()*** 不相容於從 **React.Component** 延伸方式 [ES6][] 的 class 元件， ***isMounted()*** 可能會在未來的版本中，從 React 中移除
+
+#### setProps
+
+```javascript
+setProps(object nextProps[, function callback])
+```
+
+當使用其他外部 JavaScript 時，可能會需要有一個方法可以控制由 `React.render()` 產生的 React 元件。
+
+雖然推薦使用再次呼叫 `React.render()` 更新原本的 React 元件，不過你可能還是會呼叫 ***setProps()*** 修改本身的數值，並且觸發再次呈現的動作。此外，在選擇性觸發的 callback 函式中，呼叫一次 ***setProps()*** 可以完成元件的重新呈現動作。
+
+> Noted:
+> 
+> 如果可能，非常推薦使用再次呼叫 `React.render()` 的方式，不過 ***setProps()*** 更新呈現方式會比較簡單 (在效能上面，無論使用 `React.render()` 或是 `setProps()` 並沒有明顯差異)
+> 
+> ***setProps()*** 只能在原始層級的元件上呼叫，也就是說， ***setProps()*** 只會對 `React.render()` 所產生的元件和其子項目發生影響。如果希望在子項目元件上使用 ***setProps()*** ，比較好的作法是透過 `render()` 方式，傳遞新的 props 給子項目元件，而達成期望的互動更新功能。
+> 
+> ***setProps()*** 不相容於從 **React.Component** 延伸方式 [ES6][] 的 class 元件， ***setProps()*** 可能會在未來的版本中，從 React 中移除
+
+#### replaceProps
+
+```javascript
+replaceProps(object nextProps[, function callback])
+```
+
+類似於 ***setProps()*** ，不過會刪除任何之前已經存在的 props ，而不是結合兩個物件
+
+> Noted:
+> 
+> ***replaceProps()*** 不相容於從 **React.Component** 延伸方式 [ES6][] 的 class 元件， ***replaceProps()*** 可能會在未來的版本中，從 React 中移除
 
 ### <a name="React_life_cycle"></a>React生命週期
 
@@ -252,7 +366,7 @@ Instances of a React Component are created internally in React when rendering. T
 
 類型：陣列
 
-***mixins*** 陣列供一個可以在許多元件中，共用 mixins 的行為，可以參考 [Reusable Components][]
+***mixins*** 陣列供一個可以在許多元件中，共用 `mixins` 的行為，可以參考 [Reusable Components][]
 
 #### statics
 
@@ -260,7 +374,7 @@ Instances of a React Component are created internally in React when rendering. T
 
 ***statics*** 允許定義靜態的方法，也可以在物件中的各個元件中使用，例如：
 
-```
+```javascript
 var MyComponent = React.createClass({
     statics: {
         customMethod: function(foo) {
@@ -290,7 +404,7 @@ MyComponent.customMethod('bar');  // true
 
 #### Mounting: componentWillMount
 
-```
+```javascript
 componentWillMount()
 ```
 
@@ -298,7 +412,7 @@ componentWillMount()
 
 #### Mounting: componentDidMount
 
-```
+```javascript
 componentDidMount()
 ```
 
@@ -308,7 +422,7 @@ componentDidMount()
 
 #### Updating: componentWillReceiveProps
 
-```
+```javascript
 componentWillReceiveProps(object nextProps)
 ```
 
@@ -316,7 +430,7 @@ componentWillReceiveProps(object nextProps)
 
 使用 ***componentWillReceiveProps*** 的時機是用於 render 物件前，並且使用 ***this.setState()*** 方式更新 prop 的項目。原本的 props 可以使用 ***this.props*** 存取，在 ***componentWillReceiveProps()*** 方法中，使用 ***this.setState()*** 不會再次觸發其他的 render 功能。
 
-```
+```javascript
 componentWillReceiveProps: function(nextProps) {
     this.setState({
         likesIncreasing: nextProps.likeCount > this.props.likeCount
@@ -330,7 +444,7 @@ componentWillReceiveProps: function(nextProps) {
 
 #### Updating: shouldComponentUpdate
 
-```
+```javascript
 boolean shouldComponentUpdate(object nextProps, object nextState)
 ```
 
@@ -338,7 +452,7 @@ boolean shouldComponentUpdate(object nextProps, object nextState)
 
 在新的 props 和 stats 發生改變時，使用 ***shouldComponentUpdate*** 會回傳 **false**，也不需要元件確實更新。
 
-```
+```javascript
 boolean shouldComponentUpdate(object nextProps, object nextState) {
     return nextProps.id !== this.props.id;
 }
@@ -352,7 +466,7 @@ boolean shouldComponentUpdate(object nextProps, object nextState) {
 
 #### Updating: componentWillUpdate
 
-```
+```javascript
 componentWillUpdate(object nextProps, object nextState)
 ```
 
@@ -366,7 +480,7 @@ componentWillUpdate(object nextProps, object nextState)
 
 #### Updating: componentDidUpdate
 
-```
+```javascript
 componentDidUpdate(object prevProp, object prevState)
 ```
 
@@ -376,7 +490,7 @@ componentDidUpdate(object prevProp, object prevState)
 
 #### Unmounting: componentWillUnmount
 
-```
+```javascript
 componentWillUnmount()
 ```
 
