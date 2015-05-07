@@ -130,8 +130,74 @@ boolean isValidElement(* object)
 DOMElement findDOMNode(ReactComponent component)
 ```
 
+如果元件已經在 DOM 中呈現， ***findDOMNode()*** 會回傳實際在瀏覽器呈現的 DOM 元素。 ***findDOMNode()*** 對於讀取如表單欄位值和管理 DOM 非常有用。如果查找 DOM 後，回傳 *null* 或是 *false* ，則 ***findDOMNode()*** 也會回傳 *null*
+
+#### React.DOM
+
+***React.DOM*** 提供一個簡單包裝 DOM ，產出**React.createElement** 的方式。 ***React.DOM*** 只有在 *非* **[JSX][]** 運用時使用。
+
+例如：
+
+```
+React.DOM.div(null, 'Hello Wrold!')
+```
+
+##### React.PropTypes
+
+***React.PropTypes*** 包含使用元件的 **propTypes** 有效傳至元件的 props 。想要獲取更多 **propTypes** 的資訊，可以參考 [Reusable Components][] 。
+
+###### React.initializeTouchEvents
+
+```
+initializeTouchEvents(boolean shouldUseTouch)
+```
+
+讓 React 的事件，可以讓行動裝置也可以使用的方式。
+
+##### React.Children
+
+***React.Children** 提供一個處理工具，可以處理 **this.props.children** 資料結構
+
+###### React.Children.map
+
+```
+object React.Children.map(
+    object children,
+    function fn 
+    [, object context]
+)
+```
+
+當子項目設定了內容時，會立即觸發 **fn** 動作，並影響子項目。如果子項目是巢狀物件或陣列，則 **fn** 會全部發生影響： **fn** 不會把物件傳送至子項目本身的容器中。如果子項目是 *null* 或是 *undefined* ，則會回傳 *null* 或是 *undefined* 而不是一個 *空物件*。
+
+###### React.Children.forEach
+
+```
+React.Children.forEach(
+    object children,
+    function fn
+    [, object context]
+)
+```
+
+類似於 ***React.Children.map()***，但是 ***React.Children.forEach()*** 不會回傳一個物件。
+
+###### React.Children.count
+
+```
+number React.Children.count(object children)
+```
+
+回傳子項目中的全部元件的總數，如同使用 **map** 或是 **forEach** 所影響的所有子項目次數的總和。
 
 
+###### React.Children.only
+
+```
+object React.Children.only(object children)
+```
+
+只會回傳子項目集合中，唯一一個 (Kim 註：第一個) 子項目。
 
 ### <a name="React_life_cycle"></a>React生命週期
 
