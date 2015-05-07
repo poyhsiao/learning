@@ -12,7 +12,7 @@
 
 ## reactjs
 
-### Top-level API
+### <a name="TOP-level_api"></a>Top-level API
 
 #### React
 
@@ -198,6 +198,14 @@ object React.Children.only(object children)
 ```
 
 只會回傳子項目集合中，唯一一個 (Kim 註：第一個) 子項目。
+
+### <a name="Component_API"></a>元件 API
+
+#### React.Component
+
+當執行 React 後， React 元件即會於 React 物件內部建立。在 React 運行後，即可以重複使用 React 項目，也可以使用 `this` 的方式於 React 中存取元件提供的相關方法。如果想要在 React 外部存取 React 元件，則需要使用 `React.render` 存取已經儲存在 React 中的項目。元件的其他項目，可以參考 [more about refs][] 獲取相同資訊。
+Instances of a React Component are created internally in React when rendering. These instances are reused in subsequent renders, and can be accessed in your component methods as `this`. The only way to get a handle to a React Component instance outside of React is by storing the return value of `React.render`. Inside other Components, you may use [refs](/react/docs/more-about-refs.html) to achieve the same result.
+
 
 ### <a name="React_life_cycle"></a>React生命週期
 
@@ -387,6 +395,8 @@ componentWillUnmount()
 [Component API]: https://facebook.github.io/react/docs/component-api.html "Component API"
 
 [v0.13 RC2 blog post]: https://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.html "v0.13 RC2 blog post"
+
+[more about refs]: https://facebook.github.io/react/docs/more-about-refs.html "more about refs"
 
 [Component Specs and Livecycle]: https://facebook.github.io/react/docs/component-specs.html "Component Specs and Livecycle"
 
